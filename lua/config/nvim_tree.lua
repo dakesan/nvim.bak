@@ -14,7 +14,7 @@
 -- See: `:help NvimTree`
 
 
--- Global options
+
 local g = vim.g
 
 g.nvim_tree_highlight_opened_files = 1
@@ -35,34 +35,32 @@ end
 
 -- Call setup:
 --- Each of these are documented in `:help nvim-tree.OPTION_NAME`
-nvim_tree.setup {
-  open_on_setup = false,
-  open_on_setup_file = true,
-  open_on_tab = true,
-  auto_close = false,
-  update_cwd = true,
-  view = { width = 32 },
-  renderer = {
-    indent_markers = {
-      enable = false,
-      icons = {
-        corner = "└ ",
-        edge = "│ ",
-        none = "  ",
+
+require'nvim-tree'.setup{
+    open_on_setup_file = true,
+    open_on_tab = true,
+    auto_close = false,
+    update_cwd = true,
+    view = { width = 32 },
+    renderer = {
+      indent_markers = {
+        enable = false,
+        icons = {
+          corner = "└ ",
+          edge = "│ ",
+          none = "  ",
+        },
       },
     },
-  },
-  actions = {
-    change_dir = { enable = false },
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
-  filters = {
-    dotfiles = true,
-    custom = { 'node_modules', '.cache', '.bin' },
-  },
+    actions = {
+      change_dir = { enable = false },
+    },
+    update_focused_file = {
+      enable = true,
+      update_cwd = true,
+    },
+    filters = {
+      dotfiles = true,
+      custom = { 'node_modules', '.cache', '.bin' },
+    },
 }
-
-

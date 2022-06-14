@@ -1,7 +1,15 @@
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
+
 local nocode = function()
     return vim.fn.exists('g:vscode') == 0
 end
 
+-- -- local not_vscode = [[not vim.g.vscode]]
 local utils = require('utils')
 
 require('packer').startup(function()
@@ -19,7 +27,7 @@ require('packer').startup(function()
     use {"tpope/vim-commentary"}
     use {"tpope/vim-repeat"}
     use {"jiangmiao/auto-pairs"}
-    use {"sheerun/vim-polyglot"}
+    -- use {"sheerun/vim-polyglot"}
     use {'psliwka/vim-smoothie'}
     use {'unblevable/quick-scope'}
     use {'rhysd/clever-f.vim'}
@@ -48,12 +56,6 @@ require('packer').startup(function()
     use {"terryma/vim-expand-region"}
 
     -- nvim tree
-    -- use {
-    --     'kyazdani42/nvim-tree.lua',
-    --     requires = {
-    --         'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    --     }
-    -- }
     -- substitute.nvim
     -- yiw->gs"などで　ヤンク->置換
     use({
@@ -138,6 +140,7 @@ require('packer').startup(function()
     -- use { 'dracula/vim', as = 'dracula' }
     use ({
         'catppuccin/nvim',
-        as = 'catppucin'
+        as = 'catppucin',
+        -- cond = not_vscode
     })
 end)

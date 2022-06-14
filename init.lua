@@ -6,6 +6,7 @@ require('config.colorscheme')
 require('config.vimsettings')
 -- require('config.nvim_tree')
 require('config.keysettings')
+require('config.tree_sitter')
 
 
 -- ctrl+s save on insertmode
