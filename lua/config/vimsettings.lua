@@ -19,45 +19,20 @@ vim.o.wildmode = 'list:longest'
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.o.mouse = "a"
+
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
 -- quick-scopeをvscodeに反映させる
-vim.cmd[[highlight quickscopeprimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
-vim.cmd[[highlight quickscopesecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
-vim.cmd[[ let g:qs_highlight_on_keys = ['f', 'f', 't', 't'] ]]
+-- vim.cmd[[highlight quickscopeprimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
+-- vim.cmd[[highlight quickscopesecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
+-- vim.cmd[[ let g:qs_highlight_on_keys = ['f', 'f', 't', 't'] ]]
 
--- clipboard
--- vim.cmd[[
--- set clipboard+=unnamedplus
--- let g:clipboard = {
---   \   'name': 'win32yank-wsl',
---   \   'copy': {
---   \      '+': 'win32yank.exe -i --crlf',
---   \      '*': 'win32yank.exe -i --crlf',
---   \    },
---   \   'paste': {
---   \      '+': 'win32yank.exe -o --lf',
---   \      '*': 'win32yank.exe -o --lf',
---   \   },
---   \   'cache_enabled': 0,
---   \ }
--- ]]
--- vim.cmd[[
---     set clipboard&
---     set clipboard^=unnamedplus
--- ]]
 
--- vim.cmd [[
---     let s:clip = '/mnt/c/Windows/System32/clip.exe'
--- if executable(s:clip)
---     augroup WSLYank
---         autocmd!
---         autocmd TextYankPost * call system*'echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
---     augroup END
--- end
+vim.cmd[[
+    set clipboard&
+    set clipboard^=unnamedplus
+]]
 
--- map <silent> "=p :r !powershell.exe -Command Get-Clipboard<CR>
--- map! <silent> <C-r>= :r !powershell.exe -Command Get-Clipboard<CR>
--- noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
--- ]]
+

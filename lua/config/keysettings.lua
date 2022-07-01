@@ -2,18 +2,17 @@ local utils = require('utils')
 
 -- keys
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.api.nvim_set_keymap("n", "<leader>re", ":source ~/.config/nvim/init.lua", { noremap = true })
 
 -- keymappings
 vim.api.nvim_set_keymap('n', '<C-l>', '<cmd>noh<CR>', {noremap = true}) -- Clear highlights
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', {noremap = true})           -- jk to escape
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>i", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-j>", "<Plug>(edgemotion-j)", {noremap = true})
-vim.api.nvim_set_keymap("n", "<C-k>", "<Plug>(edgemotion-k)", {noremap = true})
 
 -- VSCode which key
 -- vim.cmd [[nnoremap <space> <Cmd>call VSCodeNotify('whichkey.show')<CR>]]
-
 -- substitute
 vim.api.nvim_set_keymap("n", "<leader><leader>p", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader><leader>P", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
@@ -43,29 +42,12 @@ vim.api.nvim_set_keymap("v", "C", '"_C', {noremap=true})
 
 
 local opts = {noremap = false, silent = true}
--- vim.api.nvim_set_keymap("n", "<leader><leader>f", "<Plug>(easymotion-prefix)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>l", "<Plug>(easymotion-lineforward)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>j", "<Plug>(easymotion-j)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>k", "<Plug>(easymotion-k)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>h", "<Plug>(easymotion-linebackward)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>s", "<Plug>(easymotion-s2)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>w", "<Plug>(easymotion-w)", opts)
--- vim.api.nvim_set_keymap("n", "<Leader><leader>b", "<Plug>(easymotion-b)", opts)
-
--- vim.api.nvim_set_keymap("v", "<leader><leader>f", "<Plug>(easymotion-prefix)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>l", "<Plug>(easymotion-lineforward)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>j", "<Plug>(easymotion-j)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>k", "<Plug>(easymotion-k)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>h", "<Plug>(easymotion-linebackward)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>s", "<Plug>(easymotion-s2)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>w", "<Plug>(easymotion-w)", opts)
--- vim.api.nvim_set_keymap("v", "<Leader><leader>b", "<Plug>(easymotion-b)", opts)
 vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
 vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
-vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader><leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
 vim.api.nvim_set_keymap('v', '<leader><leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
 vim.api.nvim_set_keymap('o', '<leader><leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>", {})

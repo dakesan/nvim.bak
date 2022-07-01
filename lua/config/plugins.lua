@@ -1,46 +1,68 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+                                      install_path})
 end
-
 
 local nocode = function()
     return vim.fn.exists('g:vscode') == 0
 end
-
--- -- local not_vscode = [[not vim.g.vscode]]
 local utils = require('utils')
 
 require('packer').startup(function()
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    local vscode = "vim.fn.exists('g:vscode') ~= 0"
+    local term = "vim.fn.exists('g:vscode') == 0"
 
-    -- 基本プラグイン
-    use {"tpope/vim-surround"}
-    -- use {
-    --     'numToStr/Comment.nvim',
-    --     config = function()
-    --         require('Comment').setup()
-    --     end
-    -- }
-    use {"tpope/vim-commentary"}
-    use {"tpope/vim-repeat"}
-    use {"jiangmiao/auto-pairs"}
-    -- use {"sheerun/vim-polyglot"}
-    use {'psliwka/vim-smoothie'}
-    use {'unblevable/quick-scope'}
-    use {'rhysd/clever-f.vim'}
-    use {"haya14busa/vim-edgemotion"}
-    use {"yutkat/wb-only-current-line.vim"}
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        cond = term,
+        run = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false
+                },
+                indent = {
+                    enable = true
+                },
+                matchup = {
+                    enable = true
+                }
+            }
+        end
+    }
+    use {"machakann/vim-sandwich"}
+    use {
+        'unblevable/quick-scope',
+        setup = [[require('config.quickscope')]],
+        keys = {'f', 'F', 't', 'T'}
+    }
+    -- use {"tpope/vim-commentary"}
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    }
+    -- use {'rhysd/clever-f.vim'}
+    -- use {"haya14busa/vim-edgemotion"}
+    -- use {"yutkat/wb-only-current-line.vim"}
     use {"kana/vim-niceblock"}
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons' -- optional, for file icon
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+        requires = {'kyazdani42/nvim-web-devicons'},
+        tag = 'nightly',
+        config = [[require('config.nvim_tree')]],
+        cond = term
     }
-
     use {
         'phaazon/hop.nvim',
         branch = 'v1', -- optional but strongly recommended
@@ -55,7 +77,6 @@ require('packer').startup(function()
     -- +で拡大, _で縮小
     use {"terryma/vim-expand-region"}
 
-    -- nvim tree
     -- substitute.nvim
     -- yiw->gs"などで　ヤンク->置換
     use({
@@ -79,21 +100,6 @@ require('packer').startup(function()
         end
     })
 
-    -- 連番
-    --     " Sequencial numbering use default settings(ref. global variables).
-    -- :'<,'>RengBang
-    -- " Specify pattern like this. This sample is for array index.
-    -- :'<,'>RengBang \[\zs\(\d\+\)\ze\]
-    -- " Start sequencial numbering from 3.
-    -- :'<,'>RengBang \(\d\+\)  3
-    -- " Start from 3 and 2 step.
-    -- :'<,'>RengBang \(\d\+\)  0  2
-    -- " Start position use first detected number.
-    -- :'<,'>RengBang \(\d\+\)  0  1  1
-    -- " Use format %03d for replacing to sequencial number like '001.'.
-    -- :'<,'>RengBang \(\d\+\)  0  1  0  %03d.
-    use {"deris/vim-rengbang"}
-
     -- Lazy loading:
     -- Load on specific commands
     use {
@@ -113,34 +119,69 @@ require('packer').startup(function()
     use {
         'iamcco/markdown-preview.nvim',
         run = 'cd app && yarn install',
-        cmd = 'MarkdownPreview'
+        cmd = 'MarkdownPreview',
+        setup = function()
+            vim.g.mkdp_filetypes = {"markdown"}
+        end,
+        ft = {"markdown"},
+        cond = term
     }
 
     -- Post-install/update hook with neovim command
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+        run = ':TSUpdate',
+        config = [[require("config.tree_sitter")]]
     }
 
     -- move
-    use 'fedepujol/move.nvim'
+    use {
+        'fedepujol/move.nvim',
+        cond = term
+    }
 
-    -- Use specific branch, dependency and run lua file after load
+    use {
+        'catppuccin/nvim',
+        as = 'catppucin'
+    }
+
+    -- -- lsp
     -- use {
-    --     'glepnir/galaxyline.nvim',
-    --     branch = 'main',
-    --     config = function()
-    --         require 'statusline'
-    --     end,
-    --     requires = {'kyazdani42/nvim-web-devicons'}
+    --     "neovim/nvim-lspconfig",
+    --     cond = term
+    -- }
+    --
+    -- use {
+    --     'hrsh7th/cmp-nvim-lsp',
+    --     cond = term
+    -- }
+    -- use {
+    --     'hrsh7th/cmp-buffer',
+    --     cond = term
+    -- }
+    -- use {
+    --     'hrsh7th/cmp-path',
+    --     cond = term
+    -- }
+    -- use {
+    --     'hrsh7th/cmp-cmdline',
+    --     cond = term
+    -- }
+    -- use {
+    --     'hrsh7th/nvim-cmp',
+    --     cond = term
+    -- }
+    --
+    -- use {
+    --     'L3MON4D3/LuaSnip',
+    --     cond = term
+    -- }
+    -- use {
+    --     'saadparwaiz1/cmp_luasnip',
+    --     cond = term
     -- }
 
-    -- themes
-    -- cond = { nocode },
-    -- use { 'dracula/vim', as = 'dracula' }
-    use ({
-        'catppuccin/nvim',
-        as = 'catppucin',
-        -- cond = not_vscode
-    })
 end)
+
+require('Comment').setup()
+require('config.quickscope')
