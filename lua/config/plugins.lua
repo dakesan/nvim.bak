@@ -144,6 +144,7 @@ require('packer').startup(function()
         'catppuccin/nvim',
         as = 'catppucin'
     }
+    
 
     -- -- lsp
     -- use {

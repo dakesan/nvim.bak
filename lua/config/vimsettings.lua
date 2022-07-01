@@ -1,5 +1,4 @@
 -- local utils = require('utils')
-
 local cmd = vim.cmd
 local indent = 4
 vim.api.nvim_set_option('syntax', 'enable')
@@ -23,11 +22,6 @@ vim.o.mouse = "a"
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
-
--- quick-scopeをvscodeに反映させる
--- vim.cmd[[highlight quickscopeprimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
--- vim.cmd[[highlight quickscopesecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
--- vim.cmd[[ let g:qs_highlight_on_keys = ['f', 'f', 't', 't'] ]]
 
 
 vim.cmd[[

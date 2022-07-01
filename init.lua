@@ -16,3 +16,14 @@ vim.api.nvim_set_keymap("n", "<c-s>", ":w<cr>", { noremap = true })
 -- vim.cmd[[highlight quickscopeprimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
 -- vim.cmd[[highlight quickscopesecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
 -- vim.cmd[[ let g:qs_highlight_on_keys = ['f', 'f', 't', 't'] ]]
+
+vim.cmd[[
+    let g:clipboard = {
+        \   'name': 'win32yank-wsl',
+        \   'copy': {
+        \      '+': 'clip.exe',
+        \      '*': 'clip.exe',
+        \    },
+        \   'cache_enabled': 0,
+        \ }
+]]
