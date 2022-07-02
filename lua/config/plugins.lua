@@ -16,7 +16,6 @@ require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        cond = term,
         run = ':TSUpdate',
         config = function()
             require'nvim-treesitter.configs'.setup {
@@ -128,11 +127,6 @@ require('packer').startup(function()
     }
 
     -- Post-install/update hook with neovim command
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = [[require("config.tree_sitter")]]
-    }
 
     -- move
     use {
