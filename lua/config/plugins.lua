@@ -138,6 +138,13 @@ require('packer').startup(function()
         'catppuccin/nvim',
         as = 'catppucin'
     }
+
+    use {
+	    'bkad/CamelCaseMotion',
+	    setup = function()
+		    vim.cmd[[let g:camelcasemotion_key = '<leader>']]
+		end,
+    }
     
 
     -- -- lsp

@@ -113,7 +113,7 @@ nvim_tree.setup({
   },
 })
 
-vim.keymap.set('n', '<leader>e', function()
+vim.keymap.set('n', '<leader><leader>e', function()
   return require('nvim-tree').toggle(true, false)
 end,
 { noremap = true, silent = true, desc = "toggle nvim-tree"})
