@@ -49,7 +49,8 @@ require('packer').startup(function()
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup {}
-        end
+        end,
+        cond = term
     }
     -- use {'rhysd/clever-f.vim'}
     -- use {"haya14busa/vim-edgemotion"}
@@ -109,10 +110,10 @@ require('packer').startup(function()
 
     -- match up
     -- %keyで括弧の最後にジャンプする
-    use {
-        'andymass/vim-matchup',
-        event = 'VimEnter'
-    }
+    -- use {
+    --     'andymass/vim-matchup',
+    --     event = 'VimEnter',
+    -- }
 
     -- Plugins can have post-install/update hooks
     use {
@@ -136,7 +137,7 @@ require('packer').startup(function()
 
     use {
         'catppuccin/nvim',
-        as = 'catppucin'
+        as = 'catppucin',
     }
 
     use {

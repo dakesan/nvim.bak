@@ -1,7 +1,6 @@
 -- local utils = require('utils')
 local cmd = vim.cmd
 local indent = 4
-vim.api.nvim_set_option('syntax', 'enable')
 vim.api.nvim_set_option('filetype', 'on')
 vim.bo.expandtab = true
 vim.bo.shiftwidth = indent
