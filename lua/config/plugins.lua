@@ -38,7 +38,7 @@ require('packer').startup(function()
         setup = [[require('config.quickscope')]],
         keys = {'f', 'F', 't', 'T'}
     }
-    -- use {"tpope/vim-commentary"}
+    -- use {"tpope/vim-bommentary"}
     use {
         'numToStr/Comment.nvim',
         config = function()
@@ -65,7 +65,7 @@ require('packer').startup(function()
     }
     use {
         'phaazon/hop.nvim',
-        branch = 'v1', -- optional but strongly recommended
+        branch = 'v2', -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
             require'hop'.setup {
