@@ -127,7 +127,6 @@ require('packer').startup(function()
         cond = term
     }
 
-    -- Post-install/update hook with neovim command
 
     -- move
     use {
@@ -139,6 +138,22 @@ require('packer').startup(function()
         'catppuccin/nvim',
         as = 'catppucin',
     }
+
+	use {
+		'David-Kunz/treesitter-unit'
+	} 
+
+	use {
+		'mfussenegger/nvim-treehopper',
+		after = 'nvim-treesitter',
+		config = function()
+			vim.cmd([[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]])
+vim.cmd([[vnoremap <silent> m :lua require('tsht').nodes()<CR>]])
+require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'h', 'g', 'm' }
+		end
+	}
+
+	use { 'mizlan/iswap.nvim' }
 
   --   use {
 	 --    'bkad/CamelCaseMotion',
