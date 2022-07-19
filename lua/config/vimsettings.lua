@@ -27,3 +27,4 @@ vim.cmd [[
     set clipboard^=unnamedplus
 ]]
 
+vim.cmd "let g:python3_host_prog = '/home/oodake/miniconda3/envs/py310/bin/python3'"

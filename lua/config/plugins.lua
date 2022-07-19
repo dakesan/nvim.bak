@@ -127,7 +127,6 @@ require('packer').startup(function()
         cond = term
     }
 
-
     -- move
     use {
         'fedepujol/move.nvim',
@@ -136,32 +135,31 @@ require('packer').startup(function()
 
     use {
         'catppuccin/nvim',
-        as = 'catppucin',
+        as = 'catppucin'
     }
 
-	use {
-		'David-Kunz/treesitter-unit'
-	} 
+    use {'David-Kunz/treesitter-unit'}
 
-	use {
-		'mfussenegger/nvim-treehopper',
-		after = 'nvim-treesitter',
-		config = function()
-			vim.cmd([[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]])
-vim.cmd([[vnoremap <silent> m :lua require('tsht').nodes()<CR>]])
-require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'h', 'g', 'm' }
-		end
-	}
+    use {
+        'mfussenegger/nvim-treehopper',
+        after = 'nvim-treesitter',
+        config = function()
+            vim.cmd([[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]])
+            vim.cmd([[vnoremap <silent> m :lua require('tsht').nodes()<CR>]])
+            require('tsht').config.hint_keys = {'j', 'k', 'l', 'f', 'd', 's', 'h', 'g', 'm'}
+        end
+    }
 
-	use { 'mizlan/iswap.nvim' }
+    use {'mizlan/iswap.nvim'}
 
-  --   use {
-	 --    'bkad/CamelCaseMotion',
-	 --    setup = function()
-		--     vim.cmd[[let g:camelcasemotion_key = '<leader>']]
-		-- end,
-  --   }
-    
+    use {'goerz/jupytext.vim'}
+
+    --   use {
+    --    'bkad/CamelCaseMotion',
+    --    setup = function()
+    --     vim.cmd[[let g:camelcasemotion_key = '<leader>']]
+    -- end,
+    --   }
 
     -- -- lsp
     -- use {
