@@ -17,15 +17,13 @@ vim.o.wildmode = 'list:longest'
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.o.mouse = "a"
+vim.o.mouse = "nvi"
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
-
-vim.cmd[[
+vim.cmd [[
     set clipboard&
     set clipboard^=unnamedplus
 ]]
-
 
