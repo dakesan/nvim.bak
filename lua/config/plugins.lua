@@ -152,6 +152,9 @@ require('packer').startup(function()
 
     use {'mizlan/iswap.nvim'}
 
+    use {'gpanders/editorconfig.nvim'}
+    -- use {'editorconfig/editorconfig-vim'}
+
     use {'goerz/jupytext.vim'}
 
     --   use {
