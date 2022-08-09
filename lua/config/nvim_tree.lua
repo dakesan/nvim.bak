@@ -113,7 +113,9 @@ nvim_tree.setup({
   },
 })
 
-vim.keymap.set('n', '<leader><leader>e', function()
+vim.keymap.set('n', '<leader><leader>E', function()
   return require('nvim-tree').toggle(true, false)
 end,
 { noremap = true, silent = true, desc = "toggle nvim-tree"})
+
+vim.api.nvim_set_keymap("n", "<leader>leader>t", "<cmd>NvimTreeFocus<CR>", {})
