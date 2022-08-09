@@ -108,11 +108,8 @@ require('packer').startup(function()
         cmd = {'Dispatch', 'Make', 'Focus', 'Start'}
     }
 
-    -- match up
-    -- %keyで括弧の最後にジャンプする
     -- use {
-    --     'andymass/vim-matchup',
-    --     event = 'VimEnter',
+    --     'ojroques/nvim-osc52'
     -- }
 
     -- Plugins can have post-install/update hooks
@@ -204,3 +201,4 @@ end)
 
 require('Comment').setup()
 require('config.quickscope')
+-- require('config.osc52')

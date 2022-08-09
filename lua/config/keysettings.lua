@@ -65,6 +65,7 @@ vim.api.nvim_set_keymap('n', '<leader><leader>l', "<cmd>HopWordCurrentLineAC<cr>
 vim.api.nvim_set_keymap('v', '<leader><leader>l', "<cmd>HopWordCurrentLineAC<cr>", {})
 
 
+vim.api.nvim_set_keymap('n', '<leader><leader>s', "<cmd>ISwap<cr>", {})
 -- nvim tree
 
 utils.map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
@@ -93,7 +94,7 @@ vim.api.nvim_set_keymap('v', '<A-k>', ":MoveBlock(-1)<CR>", { noremap = true, si
 vim.api.nvim_set_keymap('n', '<A-l>', ":MoveHChar(1)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-h>', ":MoveHChar(-1)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<A-l>', ":MoveHBlock(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-h>', ":MoveHBlock(-1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-h>', ":MoveBlock(-1)<CR>", { noremap = true, silent = true })
 
 
 -- treesitter unit
