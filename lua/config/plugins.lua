@@ -1,7 +1,7 @@
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-                                      install_path})
+    packer_bootstrap = vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+        install_path })
 end
 
 local nocode = function()
@@ -18,7 +18,7 @@ require('packer').startup(function()
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function()
-            require'nvim-treesitter.configs'.setup {
+            require 'nvim-treesitter.configs'.setup {
                 highlight = {
                     enable = false,
                     additional_vim_regex_highlighting = false
@@ -32,7 +32,14 @@ require('packer').startup(function()
             }
         end
     }
-    -- use {"machakann/vim-sandwich"}
+    use({
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            require("lualine").setup()
+        end,
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        cond = term,
+    })
     use({
         "kylechui/nvim-surround",
         config = function()
@@ -44,7 +51,7 @@ require('packer').startup(function()
     use {
         'unblevable/quick-scope',
         setup = [[require('config.quickscope')]],
-        keys = {'f', 'F', 't', 'T'}
+        keys = { 'f', 'F', 't', 'T' }
     }
     -- use {"tpope/vim-bommentary"}
     use {
@@ -63,10 +70,10 @@ require('packer').startup(function()
     -- use {'rhysd/clever-f.vim'}
     -- use {"haya14busa/vim-edgemotion"}
     -- use {"yutkat/wb-only-current-line.vim"}
-    use {"kana/vim-niceblock"}
+    use { "kana/vim-niceblock" }
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons'},
+        requires = { 'kyazdani42/nvim-web-devicons' },
         tag = 'nightly',
         config = [[require('config.nvim_tree')]],
         cond = term
@@ -76,14 +83,14 @@ require('packer').startup(function()
         branch = 'v2', -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
-            require'hop'.setup {
+            require 'hop'.setup {
                 keys = 'etovxqpdygfblzhckisuran'
             }
         end
     }
     -- vim-expand-region
     -- +で拡大, _で縮小
-    use {"terryma/vim-expand-region"}
+    use { "terryma/vim-expand-region" }
 
     -- substitute.nvim
     -- yiw->gs"などで　ヤンク->置換
@@ -113,7 +120,7 @@ require('packer').startup(function()
     use {
         'tpope/vim-dispatch',
         opt = true,
-        cmd = {'Dispatch', 'Make', 'Focus', 'Start'}
+        cmd = { 'Dispatch', 'Make', 'Focus', 'Start' }
     }
 
     -- use {
@@ -126,9 +133,9 @@ require('packer').startup(function()
         run = 'cd app && yarn install',
         cmd = 'MarkdownPreview',
         setup = function()
-            vim.g.mkdp_filetypes = {"markdown"}
+            vim.g.mkdp_filetypes = { "markdown" }
         end,
-        ft = {"markdown"},
+        ft = { "markdown" },
         cond = term
     }
 
@@ -143,7 +150,7 @@ require('packer').startup(function()
         as = 'catppucin'
     }
 
-    use {'David-Kunz/treesitter-unit'}
+    use { 'David-Kunz/treesitter-unit' }
 
     use {
         'mfussenegger/nvim-treehopper',
@@ -151,16 +158,16 @@ require('packer').startup(function()
         config = function()
             vim.cmd([[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]])
             vim.cmd([[vnoremap <silent> m :lua require('tsht').nodes()<CR>]])
-            require('tsht').config.hint_keys = {'j', 'k', 'l', 'f', 'd', 's', 'h', 'g', 'm'}
+            require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'h', 'g', 'm' }
         end
     }
 
-    use {'mizlan/iswap.nvim'}
+    use { 'mizlan/iswap.nvim' }
 
-    use {'gpanders/editorconfig.nvim'}
+    use { 'gpanders/editorconfig.nvim' }
     -- use {'editorconfig/editorconfig-vim'}
 
-    use {'goerz/jupytext.vim'}
+    use { 'goerz/jupytext.vim' }
 
     --   use {
     --    'bkad/CamelCaseMotion',
@@ -210,3 +217,4 @@ end)
 require('Comment').setup()
 require('config.quickscope')
 -- require('config.osc52')
+require('config.lualine_setting')
