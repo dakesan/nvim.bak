@@ -177,40 +177,47 @@ require('packer').startup(function()
     --   }
 
     -- -- lsp
-    -- use {
-    --     "neovim/nvim-lspconfig",
-    --     cond = term
-    -- }
-    --
-    -- use {
-    --     'hrsh7th/cmp-nvim-lsp',
-    --     cond = term
-    -- }
-    -- use {
-    --     'hrsh7th/cmp-buffer',
-    --     cond = term
-    -- }
-    -- use {
-    --     'hrsh7th/cmp-path',
-    --     cond = term
-    -- }
-    -- use {
-    --     'hrsh7th/cmp-cmdline',
-    --     cond = term
-    -- }
-    -- use {
-    --     'hrsh7th/nvim-cmp',
-    --     cond = term
-    -- }
-    --
-    -- use {
-    --     'L3MON4D3/LuaSnip',
-    --     cond = term
-    -- }
-    -- use {
-    --     'saadparwaiz1/cmp_luasnip',
-    --     cond = term
-    -- }
+    use {
+        "neovim/nvim-lspconfig",
+        cond = term,
+        config = function ()
+            local status, nvim_lsp = pcall(require, "lspconfig")
+                if (not status) then return end
+
+            local protocol = require('vim.lsp.protocol')
+
+            local on_attach = function(client, bufnr)
+              -- format on save
+              if client.server_capabilities.documentFormattingProvider then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  group = vim.api.nvim_create_augroup("Format", { clear = true }),
+                  buffer = bufnr,
+                  callback = function() vim.lsp.buf.formatting_seq_sync() end
+                })
+              end
+            end
+
+            local lsp_flags = {
+                debounce_text_changes = 150,
+            }
+
+            require'lspconfig'["pyright"].setup{
+                on_attach = on_attach,
+                flags = lsp_flags
+            }
+        end
+    }
+    use { 'onsails/lspkind-nvim', cond = term, }
+    use { 'hrsh7th/cmp-buffer', cond = term, }
+    use { 'hrsh7th/cmp-path', cond = term, }
+    use { 'hrsh7th/cmp-nvim-lsp', cond = term, }
+    use { 'hrsh7th/cmp-cmdline', cond = term }
+    use { 'hrsh7th/nvim-cmp' }
+    use { 'jose-elias-alvarez/null-ls.nvim', cond = term, }
+    use { 'MunifTanjim/prettier.nvim', cond = term, }
+    use { 'williamboman/mason.nvim', cond = term, }
+    use { 'williamboman/mason-lspconfig.nvim', cond = term, }
+    use { 'glepnir/lspsaga.nvim', cond = term, }
 
 end)
 
@@ -218,3 +225,4 @@ require('Comment').setup()
 require('config.quickscope')
 -- require('config.osc52')
 require('config.lualine_setting')
+require('config.lspsettings')
