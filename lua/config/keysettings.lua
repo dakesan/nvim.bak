@@ -69,8 +69,11 @@ vim.api.nvim_set_keymap('n', '<leader><leader>s', "<cmd>ISwap<cr>", {})
 -- nvim tree
 
 utils.map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
-utils.map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
-utils.map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
+utils.map('n', '<leader><leader>f', ':NvimTreeRefresh<CR>')       -- refresh
+utils.map('n', '<leader><leader>n', ':NvimTreeFindFile<CR>')      -- search file
+
+utils.map('n', '<leader><leader>g', ':bnext<CR>')       -- refresh
+utils.map('n', '<leader><leader>G', ':bprevious<CR>')       -- refresh
 
 -- Reload configuration without restart nvim
 utils.map('n', '<leader><leader>r', ':so %<CR>')

@@ -169,6 +169,13 @@ require('packer').startup(function()
 
     use { 'goerz/jupytext.vim' }
 
+    use {
+        'akinsho/nvim-bufferline.lua',
+        cond = term,
+        config = function ()
+            require"bufferline".setup{}
+        end
+    }
     --   use {
     --    'bkad/CamelCaseMotion',
     --    setup = function()
@@ -226,3 +233,4 @@ require('config.quickscope')
 -- require('config.osc52')
 require('config.lualine_setting')
 require('config.lspsettings')
+require('config.bufferline_settings')
