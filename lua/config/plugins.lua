@@ -189,19 +189,19 @@ require('packer').startup(function()
         cond = term,
         config = function ()
             local status, nvim_lsp = pcall(require, "lspconfig")
-                if (not status) then return end
+            if (not status) then return end
 
             local protocol = require('vim.lsp.protocol')
 
             local on_attach = function(client, bufnr)
-              -- format on save
-              if client.server_capabilities.documentFormattingProvider then
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                  group = vim.api.nvim_create_augroup("Format", { clear = true }),
-                  buffer = bufnr,
-                  callback = function() vim.lsp.buf.formatting_seq_sync() end
-                })
-              end
+                -- format on save
+                if client.server_capabilities.documentFormattingProvider then
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+                        buffer = bufnr,
+                        callback = function() vim.lsp.buf.formatting_seq_sync() end
+                    })
+                end
             end
 
             local lsp_flags = {
@@ -226,6 +226,12 @@ require('packer').startup(function()
     use { 'williamboman/mason-lspconfig.nvim', cond = term, }
     use { 'glepnir/lspsaga.nvim', cond = term, }
 
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
 end)
 
 require('Comment').setup()
